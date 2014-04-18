@@ -1,0 +1,68 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en-US">
+<head th:replace="fragments/headTag :: headTag (title='Owner')"></head>
+<body>
+
+<div th:include="fragments/bodyHeader (tab='view owner')" th:remove="tag"></div>
+
+<div class="container">
+    <div class="ui grid">
+        <div class="twelve wide column">
+            <h1 class="ui header">Owner</h1>
+        </div>
+        <div class="four wide column">
+            <a th:href="@{/owners/edit(id=${owner.id})}" class="small ui right floated button blue">Edit</a>
+        </div>
+    </div>
+
+    <table class="ui table segment">
+        <tr>
+            <th>First Name</th>
+            <td th:text="${owner.firstName}"></td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td th:text="${owner.lastName}"></td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td th:text="${owner.address}"></td>
+        </tr>
+        <tr>
+            <th>City</th>
+            <td th:text="${owner.city}"></td>
+        </tr>
+        <tr>
+            <th>Telephone</th>
+            <td th:text="${owner.telephone}"></td>
+        </tr>
+    </table>
+
+    <div class="ui grid">
+        <div class="twelve wide column">
+            <div class="ui header small">Pets</div>
+        </div>
+        <div class="four wide column">
+            <a th:href="@{/pets/add(ownerId=${owner.id})}" class="small ui right floated button green">Add</a>
+        </div>
+    </div>
+
+    <table class="ui table segment" th:if="${not pets.isEmpty()}">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pet: ${pets}">
+            <td><a th:href="@{/pets/edit(id=${pet.first.id})}" th:text="${pet.first.name}"></a></td>
+            <td><span class="ui small label" th:text="${pet.second.name}"/></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:include="fragments/bodyFooter" th:remove="tag"></div>
+</body>
+</html>

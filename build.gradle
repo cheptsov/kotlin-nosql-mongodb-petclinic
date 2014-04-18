@@ -1,0 +1,50 @@
+buildscript {
+    ext.kotlin_version = '0.7.115'
+    kotlin_version = '0.1-SNAPSHOT'
+    repositories {
+        mavenCentral()
+        maven {
+            url "http://oss.sonatype.org/content/repositories/snapshots"
+        }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$ext.kotlin_version"
+    }
+}
+
+apply plugin: "kotlin"
+apply plugin: 'kotlin'
+apply plugin:'application'
+
+mainClassName = "kotlinx.nosql.mongodb.samples.petclinic.controllers.ControllersPackage"
+applicationName = "petclinic"
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "http://repository.jetbrains.com/kotlin-nosql"
+    }
+    maven {
+        url "http://repo.spring.io/libs-snapshot"
+    }
+    maven {
+        url "http://oss.sonatype.org/content/repositories/snapshots"
+    }
+}
+
+dependencies {
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlin_version, changing: true
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-nosql-mongodb', version: '0.1-SNAPSHOT', changing: true
+    compile "org.springframework.boot:spring-boot-starter-web:1.0.0.RC4"
+    compile "org.thymeleaf:thymeleaf-spring4:2.1.2.RELEASE"
+}
+
+task stage(dependsOn: ['clean', 'installApp'])
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+}
