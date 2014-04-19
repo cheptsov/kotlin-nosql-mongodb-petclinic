@@ -13,12 +13,12 @@ buildscript {
     }
 }
 
-apply plugin: "kotlin"
+apply plugin: "java"
 apply plugin: 'kotlin'
 apply plugin:'application'
 
 mainClassName = "kotlinx.nosql.mongodb.samples.petclinic.controllers.ControllersPackage"
-applicationName = "petclinic"
+applicationName = "app"
 
 configurations.all {
     resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
