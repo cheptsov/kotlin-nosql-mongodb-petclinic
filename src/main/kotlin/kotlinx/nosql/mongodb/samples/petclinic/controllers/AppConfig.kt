@@ -9,7 +9,7 @@ import kotlinx.nosql.CreateDrop
 
 Configuration open class AppConfig {
     Bean open fun getMongoDB(): MongoDB {
-        val mongoURI = MongoClientURI(System.getenv("MONGOHQ_URL"))
+        val mongoURI = MongoClientURI(System.getenv("MONGO_URI"))
         val mongoDb = MongoDB(mongoURI, schemas = array(Owners, Pets, PetTypes, Vets, Visits), initialization = CreateDrop())
         return mongoDb
     }
