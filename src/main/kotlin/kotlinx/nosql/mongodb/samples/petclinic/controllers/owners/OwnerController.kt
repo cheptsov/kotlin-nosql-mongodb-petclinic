@@ -86,7 +86,7 @@ class OwnerController [Autowired] (val db: MongoDB) {
         model.addAttribute("searchQuery", if (searchParam != null) searchParam else "")
         db.withSession {
             if (searchParam != null && searchParam.isNotEmpty()) {
-                model.addAttribute("owners", Owners.findAll { search(searchParam) }.map { owner -> Pair(owner, Pets.findAll { ownerId.equal(owner.id) }.toList())}.toList())
+                model.addAttribute("owners", Owners.findAll { text(searchParam) }.map { owner -> Pair(owner, Pets.findAll { ownerId.equal(owner.id) }.toList())}.toList())
             } else {
                 model.addAttribute("owners", Owners.findAll().map { owner -> Pair(owner, Pets.findAll { ownerId.equal(owner.id) }.toList())}.toList())
             }
