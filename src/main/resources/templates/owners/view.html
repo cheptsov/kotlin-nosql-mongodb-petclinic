@@ -57,7 +57,7 @@
         <tbody>
         <tr th:each="pet: ${pets}">
             <td><a th:href="@{/pets/edit(id=${pet.first.id})}" th:text="${pet.first.name}"></a></td>
-            <td><span class="ui small label" th:text="${pet.second.name}"/></td>
+            <td th:text="${pet.second.name}"></td>
         </tr>
         </tbody>
     </table>

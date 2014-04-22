@@ -38,20 +38,20 @@ class OwnerController [Autowired] (val db: MongoDB) {
                     RequestParam("city") cityParam: String,
                     RequestParam("telephone") telephoneParam: String): String {
         db.withSession {
-            Owners.select { firstName + lastName + address + city + telephone }.find(Id<String, Owners>(idParam)).set(firstNameParam, lastNameParam, addressParam, cityParam, telephoneParam)
+            Owners.select { firstName + lastName + address + city + telephone }.find(Id(idParam)).set(firstNameParam, lastNameParam, addressParam, cityParam, telephoneParam)
         }
         return "redirect:/owners/";
     }
 
     RequestMapping(array("/add"), method = array(RequestMethod.GET))
     fun add(): String {
-        return "owners/add"
+        return "/owners/add"
     }
 
     RequestMapping(array("/edit"), method = array(RequestMethod.GET))
-    fun edit(RequestParam("id") id: String, model: Model): String {
+    fun edit(RequestParam("id") idParam: String, model: Model): String {
         db.withSession {
-            val owner = Owners.get(Id<String, Owners>(id))
+            val owner = Owners.get(Id(idParam))
             model.addAttribute("id", owner.id!!.value)
             model.addAttribute("firstName", owner.firstName)
             model.addAttribute("lastName", owner.lastName)
@@ -59,13 +59,13 @@ class OwnerController [Autowired] (val db: MongoDB) {
             model.addAttribute("city", owner.city)
             model.addAttribute("telephone", owner.telephone)
         }
-        return "owners/edit"
+        return "/owners/edit"
     }
 
     RequestMapping(array("/view"), method = array(RequestMethod.GET))
-    fun view(RequestParam("id") id: String, model: Model): String {
+    fun view(RequestParam("id") idParam: String, model: Model): String {
         db.withSession {
-            val owner = Owners.get(Id<String, Owners>(id))
+            val owner = Owners.get(Id(idParam))
             model.addAttribute("owner", owner)
             val pets = Pets.findAll { ownerId.equal(owner.id)}.map{ Pair<Pet, PetType>(it, PetTypes.get(it.typeId)) }.toList()
             model.addAttribute("pets", pets)
@@ -76,7 +76,7 @@ class OwnerController [Autowired] (val db: MongoDB) {
     RequestMapping(array("/delete"), method = array(RequestMethod.POST))
     fun delete(RequestParam("id") idParam: String): String {
         db.withSession {
-            Owners.delete { id.equal(Id<String, Owners>(idParam)) }
+            Owners.delete { id.equal(Id(idParam)) }
         }
         return "redirect:/owners/";
     }
@@ -91,6 +91,6 @@ class OwnerController [Autowired] (val db: MongoDB) {
                 model.addAttribute("owners", Owners.findAll().map { owner -> Pair(owner, Pets.findAll { ownerId.equal(owner.id) }.toList())}.toList())
             }
         }
-        return "owners/index"
+        return "/owners/index"
     }
 }

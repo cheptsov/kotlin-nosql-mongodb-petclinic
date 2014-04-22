@@ -11,7 +11,7 @@ import org.joda.time.LocalDate
 Configuration open class AppConfig {
     Bean open fun getMongoDB(): MongoDB {
         val mongoURI = MongoClientURI(System.getenv("MONGO_URI"))
-        val mongoDb = MongoDB(mongoURI, schemas = array(Owners, Pets, PetTypes, Vets, Visits), initialization = CreateDrop(onCreate = {
+        val mongoDb = MongoDB(mongoURI, schemas = array(Owners, Pets, PetTypes, Vets, Visits, Specialities), initialization = CreateDrop(onCreate = {
             val birdId = PetTypes.insert(PetType("Bird"))
             val catId = PetTypes.insert(PetType("Cat"))
             val dogId = PetTypes.insert(PetType("Dog"))
@@ -43,9 +43,20 @@ Configuration open class AppConfig {
 
             Pets.insert(Pet("George", LocalDate(2000, 1, 20), snakeId, peterId))
 
-            val robertId = Owners.insert(Owner("Robert", "Schroeder", "2749 Blackhawk Trail", "6085559436", "6085552765"))
+            val robertId = Owners.insert(Owner("Robert", "Schroeder", "2749 Blackhawk Trail", "Madison", "6085552765"))
 
             Pets.insert(Pet("Freddy", LocalDate(2000, 3, 9), lizardId, robertId))
+
+            Specialities.insert(Speciality("Radiology"))
+            Specialities.insert(Speciality("Surgery"))
+            Specialities.insert(Speciality("Dentistry"))
+
+            Vets.insert(Vet("James", "Carter", setOf()))
+            Vets.insert(Vet("Helen", "Leary", setOf("Radiology")))
+            Vets.insert(Vet("Linda", "Douglas", setOf("Surgery")))
+            Vets.insert(Vet("Rafael", "Ortega", setOf("Dentistry")))
+            Vets.insert(Vet("Henry", "Stevens", setOf("Surgery")))
+            Vets.insert(Vet("Sharon", "Jenkins", setOf("Radiology")))
         }))
         return mongoDb
     }

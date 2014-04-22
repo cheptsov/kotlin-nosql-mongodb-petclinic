@@ -3,10 +3,12 @@ package kotlinx.nosql.mongodb.samples.petclinic.data
 import kotlinx.nosql.mongodb.*
 import kotlinx.nosql.*
 
-object Vets : PersonSchema<Vet, Vets>("pets", javaClass()) {
+object Vets : Schema<Vet>("vets", javaClass()) {
+    val firstName = string("firstName")
+    val lastName = string("lastName")
     val specialities = setOfString("specialities")
 }
 
-class Vet(firstName: String, lastName : String) : Person(firstName, lastName) {
-    val id : Id<String, Owners>? = null
+class Vet(val firstName: String, val lastName : String, val specialities: Set<String>) {
+    val id : Id<String, Vets>? = null
 }
