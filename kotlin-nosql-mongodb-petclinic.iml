@@ -8,6 +8,18 @@
         </fileset>
       </configuration>
     </facet>
+    <facet type="web" name="Web Gradle : kotlin-nosql-mongodb-petclinic.war">
+      <configuration>
+        <webroots>
+          <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
+        </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
+          <root url="file://$MODULE_DIR$/src/main/kotlin" />
+        </sourceRoots>
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
@@ -23,11 +35,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="Gradle: kotlin-stdlib-0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" exported="" name="Gradle: kotlin-nosql-mongodb-0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" exported="" name="Gradle: spring-boot-starter-web-1.0.0.RC4" level="project" />
     <orderEntry type="library" exported="" name="Gradle: thymeleaf-spring4-2.1.2.RELEASE" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: kotlin-runtime-0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" exported="" name="Gradle: joda-time-2.3" level="project" />
     <orderEntry type="library" exported="" name="Gradle: mongo-java-driver-2.10.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: kotlin-nosql-0.1-SNAPSHOT" level="project" />
@@ -61,6 +71,8 @@
     <orderEntry type="library" exported="" name="Gradle: ognl-3.0.6" level="project" />
     <orderEntry type="library" exported="" name="Gradle: javassist-3.16.1-GA" level="project" />
     <orderEntry type="library" exported="" name="Gradle: thymeleaf-2.1.2.RELEASE" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: kotlin-stdlib-0.1-SNAPSHOT" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: kotlin-runtime-0.1-SNAPSHOT" level="project" />
   </component>
 </module>
 
