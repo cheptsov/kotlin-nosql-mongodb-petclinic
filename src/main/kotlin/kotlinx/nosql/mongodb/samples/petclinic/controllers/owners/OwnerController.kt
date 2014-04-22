@@ -102,6 +102,6 @@ class OwnerController [Autowired] (val db: MongoDB) {
                 model.addAttribute("owners", Owners.findAll().map { owner -> Pair(owner, Pets.findAll { ownerId.equal(owner.id) }.toList())}.toList())
             }
         }
-        return "/owners/index"
+        return "owners/index"
     }
 }
