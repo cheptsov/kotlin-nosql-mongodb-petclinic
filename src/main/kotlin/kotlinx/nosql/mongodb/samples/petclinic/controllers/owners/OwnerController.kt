@@ -15,6 +15,8 @@ import kotlinx.nosql.mongodb.samples.petclinic.data.PetTypes
 import kotlinx.nosql.mongodb.samples.petclinic.data.Pet
 import kotlinx.nosql.mongodb.samples.petclinic.data.PetType
 import java.util.regex.Pattern
+import kotlinx.nosql.mongodb.samples.petclinic.data.Visit
+import kotlinx.nosql.mongodb.samples.petclinic.data.Visits
 
 Controller RequestMapping(value = array("/owners"))
 class OwnerController [Autowired] (val db: MongoDB) {
@@ -67,8 +69,17 @@ class OwnerController [Autowired] (val db: MongoDB) {
         db.withSession {
             val owner = Owners.get(Id(idParam))
             model.addAttribute("owner", owner)
-            val pets = Pets.findAll { ownerId.equal(owner.id)}.map{ Pair<Pet, PetType>(it, PetTypes.get(it.typeId)) }.toList()
+            val pets = Pets.findAll { ownerId.equal(owner.id)}.toList()
+            pets.groupBy {  }
+            val petTypes = hashMapOf<Pet,PetType>()
+            val petVisits = hashMapOf<Pet, List<Visit>>()
+            pets.forEach {
+                petTypes.put(it, PetTypes.get(it.typeId))
+                petVisits.put(it, Visits.findAll { petId.equal(it.id) }.toList())
+            }
             model.addAttribute("pets", pets)
+            model.addAttribute("petTypes", petTypes)
+            model.addAttribute("petVisits", petVisits)
         }
         return "owners/view"
     }

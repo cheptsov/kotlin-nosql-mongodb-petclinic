@@ -28,7 +28,7 @@
         <div class="field">
             <label>Type</label>
         </div>
-        <div class="grouped inline fields">
+        <div class="grouped inline fields ui segment">
             <div th:each="petType : ${petTypes}" class="field">
                 <div class="ui radio checkbox">
                     <input type="radio" th:field="*{pet.typeId}" name="typeId"

@@ -27,8 +27,8 @@ Configuration open class AppConfig {
 
             val jeanId = Owners.insert(Owner("Jean", "Coleman", "105 N. Lake St.", "Monona", "6085552654"))
 
-            Pets.insert(Pet("Max", LocalDate(1995, 9, 4), catId, jeanId))
-            Pets.insert(Pet("Samantha", LocalDate(1995, 9, 4), catId, jeanId))
+            val maxId = Pets.insert(Pet("Max", LocalDate(1995, 9, 4), catId, jeanId))
+            val samanthaId = Pets.insert(Pet("Samantha", LocalDate(1995, 9, 4), catId, jeanId))
 
             val jeffreyId = Owners.insert(Owner("Jeffrey", "Black", "1450 Oak Blvd.", "Monona", "6085555387"))
 
@@ -57,6 +57,11 @@ Configuration open class AppConfig {
             Vets.insert(Vet("Rafael", "Ortega", setOf("Dentistry")))
             Vets.insert(Vet("Henry", "Stevens", setOf("Surgery")))
             Vets.insert(Vet("Sharon", "Jenkins", setOf("Radiology")))
+
+            Visits.insert(Visit(LocalDate(2010, 3, 4), "Rabies shot", samanthaId))
+            Visits.insert(Visit(LocalDate(2011, 3, 4), "Rabies shot", maxId))
+            Visits.insert(Visit(LocalDate(2009, 6, 4), "Neutered", maxId))
+            Visits.insert(Visit(LocalDate(2008, 9, 4), "Neutered", samanthaId))
         }))
         return mongoDb
     }
