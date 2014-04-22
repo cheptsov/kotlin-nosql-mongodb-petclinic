@@ -20,7 +20,7 @@ Controller RequestMapping(value = array("/petTypes"))
 class PetTypeController [Autowired] (val db: MongoDB) {
     RequestMapping(array("/add"), method = array(RequestMethod.GET))
     fun add(): String {
-        return "/petTypes/add"
+        return "petTypes/add"
     }
 
     RequestMapping(value = array("/add"), method = array(RequestMethod.POST))
@@ -47,7 +47,7 @@ class PetTypeController [Autowired] (val db: MongoDB) {
             model.addAttribute("id", petType.id!!.value)
             model.addAttribute("name", petType.name)
         }
-        return "/petTypes/edit"
+        return "petTypes/edit"
     }
 
     RequestMapping(array("/delete"), method = array(RequestMethod.POST))
@@ -63,6 +63,6 @@ class PetTypeController [Autowired] (val db: MongoDB) {
         db.withSession {
             model.addAttribute("petTypes", PetTypes.findAll().toList())
         }
-        return "/petTypes/index"
+        return "petTypes/index"
     }
 }

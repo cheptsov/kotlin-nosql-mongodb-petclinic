@@ -22,7 +22,7 @@ Controller RequestMapping(value = array("/specialities"))
 class SpecialityController [Autowired] (val db: MongoDB) {
     RequestMapping(array("/add"), method = array(RequestMethod.GET))
     fun add(): String {
-        return "/specialities/add"
+        return "specialities/add"
     }
 
     RequestMapping(value = array("/add"), method = array(RequestMethod.POST))
@@ -49,7 +49,7 @@ class SpecialityController [Autowired] (val db: MongoDB) {
             model.addAttribute("id", speciality.id!!.value)
             model.addAttribute("name", speciality.name)
         }
-        return "/specialities/edit"
+        return "specialities/edit"
     }
 
     RequestMapping(array("/delete"), method = array(RequestMethod.POST))
@@ -65,6 +65,6 @@ class SpecialityController [Autowired] (val db: MongoDB) {
         db.withSession {
             model.addAttribute("specialities", Specialities.findAll().toList())
         }
-        return "/specialities/index"
+        return "specialities/index"
     }
 }

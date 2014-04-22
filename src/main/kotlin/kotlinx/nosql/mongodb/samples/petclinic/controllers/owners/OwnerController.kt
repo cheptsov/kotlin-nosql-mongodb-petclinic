@@ -47,7 +47,7 @@ class OwnerController [Autowired] (val db: MongoDB) {
 
     RequestMapping(array("/add"), method = array(RequestMethod.GET))
     fun add(): String {
-        return "/owners/add"
+        return "owners/add"
     }
 
     RequestMapping(array("/edit"), method = array(RequestMethod.GET))
@@ -61,7 +61,7 @@ class OwnerController [Autowired] (val db: MongoDB) {
             model.addAttribute("city", owner.city)
             model.addAttribute("telephone", owner.telephone)
         }
-        return "/owners/edit"
+        return "owners/edit"
     }
 
     RequestMapping(array("/view"), method = array(RequestMethod.GET))

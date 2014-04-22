@@ -24,6 +24,6 @@ class VetController [Autowired] (val db: MongoDB) {
         db.withSession {
             model.addAttribute("vets", Vets.findAll().toList())
         }
-        return "/vets/index"
+        return "vets/index"
     }
 }
