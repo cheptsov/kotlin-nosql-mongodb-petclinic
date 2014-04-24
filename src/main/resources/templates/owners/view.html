@@ -17,24 +17,16 @@
 
     <table class="ui table segment">
         <tr>
-            <th>First Name</th>
-            <td th:text="${owner.firstName}"></td>
-        </tr>
-        <tr>
-            <th>Last Name</th>
-            <td th:text="${owner.lastName}"></td>
+            <th>Name</th>
+            <td><i class="user icon"></i> <span th:text="${owner.firstName + ' ' + owner.lastName}"></span></td>
         </tr>
         <tr>
             <th>Address</th>
-            <td th:text="${owner.address}"></td>
-        </tr>
-        <tr>
-            <th>City</th>
-            <td th:text="${owner.city}"></td>
+            <td><i class="map marker icon"></i> <span th:text="${owner.city + ', ' + owner.address}"></span></td>
         </tr>
         <tr>
             <th>Telephone</th>
-            <td th:text="${owner.telephone}"></td>
+            <td><i class="phone icon"></i> <span th:text="${owner.telephone}"></span></td>
         </tr>
     </table>
 
@@ -61,14 +53,16 @@
             <td style="vertical-align: top"><a th:href="@{/pets/edit(id=${pet.id})}" th:text="${pet.name}"></a></td>
             <td style="vertical-align: top" th:text="${petTypes.get(pet).name}"></td>
             <td colspan="2" style="padding: 0">
-                <table style="width: 100%">
+                <table class="ui table small " style="width: 100%">
                     <tr th:each="visit: ${petVisits.get(pet)}">
-                        <td th:text="${visit.visitDate}" style="width: 50%"/>
+                        <td style="width: 50%">
+                            <a th:text="${visit.visitDate}" th:href="@{/visits/edit(id=${visit.id})}"></a>
+                        </td>
                         <td th:text="${visit.description}" style="width: 50%"/>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <a class="mini ui green button" href="#">Add</a>
+                            <a class="mini ui green button" th:href="@{/visits/add(petId=${pet.id})}">Add Visit</a>
                         </td>
                     </tr>
                 </table>

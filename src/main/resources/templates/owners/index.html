@@ -13,7 +13,7 @@
         <div class="nine wide column">
             <div class="ui icon input" style="float: right; margin-left: 1em;">
                 <form action="" method="get">
-                    <input name="q" type="text" placeholder="Search..." th:value="${searchQuery}"/>
+                    <input name="q" type="text" placeholder="Find owners..." th:value="${searchQuery}"/>
                 </form>
                 <i class="circular search icon"></i>
             </div>
@@ -25,8 +25,8 @@
         <thead>
         <tr>
             <th>Name</th>
-            <th>Address</th>
             <th>City</th>
+            <th>Address</th>
             <th>Telephone</th>
             <th>Pets</th>
         </tr>
@@ -35,12 +35,12 @@
         <tr th:each="owner: ${owners}">
             <td><a th:href="@{/owners/view(id=${owner.first.id})}"
                    th:text="${owner.first.firstName} + ' ' + ${owner.first.lastName}"></a></td>
-            <td th:text="${owner.first.address}"></td>
             <td th:text="${owner.first.city}"></td>
+            <td th:text="${owner.first.address}"></td>
             <td th:text="${owner.first.telephone}"></td>
             <td>
                 <div th:if="${not owner.second.isEmpty()}">
-                    <span class="ui small label" th:each="pet: ${owner.second}" th:text="${pet.name}"/>
+                    <span class="ui small label teal" th:each="pet: ${owner.second}" th:text="${pet.name}"/>
                 </div>
             </td>
         </tr>

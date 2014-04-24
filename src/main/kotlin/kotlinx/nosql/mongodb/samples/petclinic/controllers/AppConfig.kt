@@ -51,7 +51,7 @@ Configuration open class AppConfig {
             Specialities.insert(Speciality("Surgery"))
             Specialities.insert(Speciality("Dentistry"))
 
-            Vets.insert(Vet("James", "Carter", setOf()))
+            Vets.insert(Vet("James", "Carter", setOf("Dentistry", "Surgery")))
             Vets.insert(Vet("Helen", "Leary", setOf("Radiology")))
             Vets.insert(Vet("Linda", "Douglas", setOf("Surgery")))
             Vets.insert(Vet("Rafael", "Ortega", setOf("Dentistry")))

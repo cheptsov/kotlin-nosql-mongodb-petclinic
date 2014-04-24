@@ -27,7 +27,7 @@
             <td> <a th:text="${vet.firstName} + ' ' + ${vet.lastName}" th:href="@{edit(id=${vet.id})}"></a></td>
             <td>
                 <div th:if="${not vet.specialities.isEmpty()}">
-                    <span class="ui small label" th:each="speciality: ${vet.specialities}" th:text="${speciality}"/>
+                    <span class="ui small teal label" th:each="speciality: ${vet.specialities}" th:text="${speciality}"/>
                 </div>
             </td>
         </tr>
