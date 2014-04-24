@@ -3,6 +3,31 @@
 <head th:replace="fragments/headTag :: headTag (title='Edit Pet')"></head>
 <body>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".ui.form").form({
+            name : {
+                identifier : 'name',
+                rules : [
+                    {
+                        type : 'empty',
+                        prompt : 'Please enter pet name'
+                    }
+                ]
+            },
+            birthDate : {
+                identifier : 'birthDate',
+                rules : [
+                    {
+                        type : 'empty',
+                        prompt : 'Please enter birth date'
+                    }
+                ]
+            }
+        })
+    })
+</script>
+
 <div th:include="fragments/bodyHeader (tab='edit pet')" th:remove="tag"></div>
 
 <div class="container">
@@ -17,13 +42,12 @@
         </div>
         <div class="field">
             <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Name"
-                   required="true" th:value="${pet.name}"/>
+            <input type="text" id="name" name="name" placeholder="Name" th:value="${pet.name}"/>
         </div>
-        <div class="field">
+        <div class="date field">
             <label for="birthDate">Birth Date</label>
             <input type="text" id="birthDate" name="birthDate" placeholder="dd/MM/yyyy"
-                   required="true" th:value="${pet.birthDate.toString('dd/MM/yyyy')}"/>
+                   th:value="${pet.birthDate.toString('dd/MM/yyyy')}"/>
         </div>
         <div class="field">
             <label>Type</label>

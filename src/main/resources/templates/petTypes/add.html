@@ -3,6 +3,22 @@
 <head th:replace="fragments/headTag :: headTag (title='Add Pet Type')"></head>
 <body>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".ui.form").form({
+            name : {
+                identifier : 'name',
+                rules : [
+                    {
+                        type : 'empty',
+                        prompt : 'Please enter name'
+                    }
+                ]
+            }
+        })
+    })
+</script>
+
 <div th:include="fragments/bodyHeader (tab='add petType')" th:remove="tag"></div>
 
 <div class="container">
@@ -11,8 +27,7 @@
     <form method="post" action="add" role="form" class="ui form">
         <div class="field">
             <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Name"
-                   required="true"/>
+            <input type="text" id="name" name="name" placeholder="Name"/>
         </div>
         <button type="submit" class="ui blue submit button">Save</button>
     </form>

@@ -3,6 +3,32 @@
 <head th:replace="fragments/headTag :: headTag (title='Edit Veterinarian')">
 </head>
 <body>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".ui.form").form({
+            firstName : {
+                identifier : 'firstName',
+                rules : [
+                    {
+                        type : 'empty',
+                        prompt : 'Please first name'
+                    }
+                ]
+            },
+            lastName : {
+                identifier : 'lastName',
+                rules : [
+                    {
+                        type : 'empty',
+                        prompt : 'Please last name'
+                    }
+                ]
+            }
+        })
+    })
+</script>
+
 <div th:include="fragments/bodyHeader (tab='edit vet')" th:remove="tag"></div>
 
 <div class="container">
