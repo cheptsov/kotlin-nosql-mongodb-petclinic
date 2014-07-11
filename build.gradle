@@ -35,8 +35,6 @@ repositories {
     }
 }
 
-/* TEST */
-
 dependencies {
     compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: kotlin_version, changing: true
     compile group: 'org.jetbrains.kotlin', name: 'kotlin-nosql-mongodb', version: '0.1-SNAPSHOT', changing: true
