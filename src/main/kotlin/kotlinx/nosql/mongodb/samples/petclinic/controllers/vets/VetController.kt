@@ -26,7 +26,7 @@ class VetController [Autowired] (val db: MongoDB) {
     RequestMapping(array("/"), method = array(RequestMethod.GET))
     fun index(model: Model): String {
         db.withSession {
-            model.addAttribute("vets", Vets.findAll().toList())
+            model.addAttribute("vets", Vets.find().toList())
         }
         return "vets/index"
     }
@@ -34,7 +34,7 @@ class VetController [Autowired] (val db: MongoDB) {
     RequestMapping(array("/add"), method = array(RequestMethod.GET))
     fun add(model: Model): String {
         db.withSession {
-            model.addAttribute("specialities", Specialities.findAll().toList())
+            model.addAttribute("specialities", Specialities.find().toList())
         }
         return "vets/add"
     }
@@ -44,7 +44,7 @@ class VetController [Autowired] (val db: MongoDB) {
                    RequestParam("lastName") lastNameParam: String, webRequest: WebRequest): String {
         db.withSession {
             val specialities = HashSet<String>()
-            Specialities.findAll().forEach {
+            Specialities.find().forEach {
                 if (webRequest.getParameter(it.name) != null) {
                     specialities.add(it.name)
                 }
@@ -57,9 +57,9 @@ class VetController [Autowired] (val db: MongoDB) {
     RequestMapping(array("/edit"), method = array(RequestMethod.GET))
     fun edit(RequestParam("id") idParam: String, model: Model): String {
         db.withSession {
-            val vet = Vets.get(Id(idParam))
+            val vet = Vets.find { id.equal(Id(idParam)) }.single()
             model.addAttribute("vet", vet)
-            model.addAttribute("specialities", Specialities.findAll().toList())
+            model.addAttribute("specialities", Specialities.find().toList())
         }
         return "vets/edit"
     }
@@ -70,12 +70,12 @@ class VetController [Autowired] (val db: MongoDB) {
                    RequestParam("lastName") lastNameParam: String, webRequest: WebRequest): String {
         db.withSession {
             val newSpecialities = HashSet<String>()
-            Specialities.findAll().forEach {
+            Specialities.find().forEach {
                 if (webRequest.getParameter(it.name) != null) {
                     newSpecialities.add(it.name)
                 }
             }
-            Vets.select { firstName + lastName + specialities }.find(Id(idParam)).set(firstNameParam, lastNameParam, newSpecialities)
+            Vets.find { id.equal(Id(idParam)) }.projection { firstName + lastName + specialities }.update(firstNameParam, lastNameParam, newSpecialities)
         }
         return "redirect:/vets/";
     }

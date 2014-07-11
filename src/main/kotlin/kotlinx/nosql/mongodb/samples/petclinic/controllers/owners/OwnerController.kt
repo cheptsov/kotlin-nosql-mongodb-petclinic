@@ -40,7 +40,7 @@ class OwnerController [Autowired] (val db: MongoDB) {
                     RequestParam("city") cityParam: String,
                     RequestParam("telephone") telephoneParam: String): String {
         db.withSession {
-            Owners.select { firstName + lastName + address + city + telephone }.find(Id(idParam)).set(firstNameParam, lastNameParam, addressParam, cityParam, telephoneParam)
+            Owners.find{ id.equal(Id(idParam))}.projection { firstName + lastName + address + city + telephone }.update(firstNameParam, lastNameParam, addressParam, cityParam, telephoneParam)
         }
         return "redirect:/owners/";
     }
@@ -53,7 +53,7 @@ class OwnerController [Autowired] (val db: MongoDB) {
     RequestMapping(array("/edit"), method = array(RequestMethod.GET))
     fun edit(RequestParam("id") idParam: String, model: Model): String {
         db.withSession {
-            val owner = Owners.get(Id(idParam))
+            val owner = Owners.find{ id.equal(Id(idParam))}.single()
             model.addAttribute("id", owner.id!!.value)
             model.addAttribute("firstName", owner.firstName)
             model.addAttribute("lastName", owner.lastName)
@@ -67,15 +67,15 @@ class OwnerController [Autowired] (val db: MongoDB) {
     RequestMapping(array("/view"), method = array(RequestMethod.GET))
     fun view(RequestParam("id") idParam: String, model: Model): String {
         db.withSession {
-            val owner = Owners.get(Id(idParam))
+            val owner = Owners.find { id.equal(Id(idParam)) }.single()
             model.addAttribute("owner", owner)
-            val pets = Pets.findAll { ownerId.equal(owner.id)}.toList()
+            val pets = Pets.find { ownerId.equal(owner.id)}.toList()
             pets.groupBy {  }
             val petTypes = hashMapOf<Pet,PetType>()
             val petVisits = hashMapOf<Pet, List<Visit>>()
             pets.forEach {
-                petTypes.put(it, PetTypes.get(it.typeId))
-                petVisits.put(it, Visits.findAll { petId.equal(it.id) }.toList())
+                petTypes.put(it, PetTypes.find { id.equal(it.typeId) }.single())
+                petVisits.put(it, Visits.find { petId.equal(it.id) }.toList())
             }
             model.addAttribute("pets", pets)
             model.addAttribute("petTypes", petTypes)
@@ -87,7 +87,7 @@ class OwnerController [Autowired] (val db: MongoDB) {
     RequestMapping(array("/delete"), method = array(RequestMethod.POST))
     fun delete(RequestParam("id") idParam: String): String {
         db.withSession {
-            Owners.delete { id.equal(Id(idParam)) }
+            Owners.find { id.equal(Id(idParam)) }.remove()
         }
         return "redirect:/owners/";
     }
@@ -97,9 +97,9 @@ class OwnerController [Autowired] (val db: MongoDB) {
         model.addAttribute("searchQuery", if (searchParam != null) searchParam else "")
         db.withSession {
             if (searchParam != null && searchParam.isNotEmpty()) {
-                model.addAttribute("owners", Owners.findAll { text(searchParam) }.map { owner -> Pair(owner, Pets.findAll { ownerId.equal(owner.id) }.toList())}.toList())
+                model.addAttribute("owners", Owners.find { text(searchParam) }.map { owner -> Pair(owner, Pets.find { ownerId.equal(owner.id) }.toList())}.toList())
             } else {
-                model.addAttribute("owners", Owners.findAll().map { owner -> Pair(owner, Pets.findAll { ownerId.equal(owner.id) }.toList())}.toList())
+                model.addAttribute("owners", Owners.find().map { owner -> Pair(owner, Pets.find { ownerId.equal(owner.id) }.toList())}.toList())
             }
         }
         return "owners/index"

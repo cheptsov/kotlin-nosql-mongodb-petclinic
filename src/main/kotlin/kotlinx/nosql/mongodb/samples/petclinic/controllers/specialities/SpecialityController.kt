@@ -37,7 +37,7 @@ class SpecialityController [Autowired] (val db: MongoDB) {
     public fun edit(RequestParam("id") idParam: String,
                     RequestParam("name") nameParam: String): String {
         db.withSession {
-            Specialities.select { name }.find(Id(idParam)).set(nameParam)
+            Specialities.find{ id.equal(Id(idParam)) }.projection { name }.update(nameParam)
         }
         return "redirect:/specialities/";
     }
@@ -45,7 +45,7 @@ class SpecialityController [Autowired] (val db: MongoDB) {
     RequestMapping(array("/edit"), method = array(RequestMethod.GET))
     fun edit(RequestParam("id") idParam: String, model: Model): String {
         db.withSession {
-            val speciality = Specialities.get(Id(idParam))
+            val speciality = Specialities.find { id.equal(Id(idParam)) }.single()
             model.addAttribute("id", speciality.id!!.value)
             model.addAttribute("name", speciality.name)
         }
@@ -55,7 +55,7 @@ class SpecialityController [Autowired] (val db: MongoDB) {
     RequestMapping(array("/delete"), method = array(RequestMethod.POST))
     fun delete(RequestParam("id") idParam: String): String {
         db.withSession {
-            Specialities.delete { id.equal(Id(idParam)) }
+            Specialities.find { id.equal(Id(idParam)) }.remove()
         }
         return "redirect:/specialities/";
     }
@@ -63,7 +63,7 @@ class SpecialityController [Autowired] (val db: MongoDB) {
     RequestMapping(array("/"), method = array(RequestMethod.GET))
     fun index(model: Model): String {
         db.withSession {
-            model.addAttribute("specialities", Specialities.findAll().toList())
+            model.addAttribute("specialities", Specialities.find().toList())
         }
         return "specialities/index"
     }

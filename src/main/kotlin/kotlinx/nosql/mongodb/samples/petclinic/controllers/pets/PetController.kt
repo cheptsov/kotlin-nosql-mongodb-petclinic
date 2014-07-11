@@ -20,9 +20,9 @@ class PetController [Autowired] (val db: MongoDB) {
     RequestMapping(value = array("/add"), method = array(RequestMethod.GET))
     public fun add(RequestParam("ownerId") ownerIdParam: String, model: Model): String {
         db.withSession {
-            val owner = Owners.get(Id(ownerIdParam))
+            val owner = Owners.find { id.equal(Id(ownerIdParam)) }.single()
             model.addAttribute("owner", owner)
-            val petTypes = PetTypes.findAll { name.equal(name) }.toList()
+            val petTypes = PetTypes.find().toList()
             model.addAttribute("petTypes", petTypes)
         }
         return "pets/add"
@@ -31,11 +31,11 @@ class PetController [Autowired] (val db: MongoDB) {
     RequestMapping(value = array("/edit"), method = array(RequestMethod.GET))
     public fun edit(RequestParam("id") idParam: String, model: Model): String {
         db.withSession {
-            val pet = Pets.get(Id(idParam))
+            val pet = Pets.find { id.equal(Id(idParam)) }.single()
             model.addAttribute("pet", pet)
-            val owner = Owners.get(pet.ownerId)
+            val owner = Owners.find { id.equal(pet.ownerId) }.single()
             model.addAttribute("owner", owner)
-            val petTypes = PetTypes.findAll { name.equal(name) }.toList()
+            val petTypes = PetTypes.find().toList()
             model.addAttribute("petTypes", petTypes)
         }
         return "pets/edit"
@@ -59,8 +59,8 @@ class PetController [Autowired] (val db: MongoDB) {
                     RequestParam("typeId") typeIdParam: String): String {
         var oId: Id<String, Owners>? = null
         db.withSession {
-            oId = Pets.select { ownerId }.get(Id(idParam))
-            Pets.select { name + birthDate + typeId }.find(Id(idParam)).set(nameParam, birthDateParam, Id(typeIdParam))
+            oId = Pets.find{ id.equal(Id(idParam)) }.projection { ownerId }.single()
+            Pets.find { id.equal(Id(idParam)) }.projection { name + birthDate + typeId }.update(nameParam, birthDateParam, Id(typeIdParam))
         }
         return "redirect:/owners/view?id=${oId!!}"
     }

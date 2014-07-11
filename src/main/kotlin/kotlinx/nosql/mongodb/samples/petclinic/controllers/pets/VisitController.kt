@@ -22,9 +22,9 @@ class VisitController [Autowired] (val db: MongoDB) {
     RequestMapping(value = array("/add"), method = array(RequestMethod.GET))
     public fun add(RequestParam("petId") petIdParam: String, model: Model): String {
         db.withSession {
-            val pet = Pets.get(Id(petIdParam))
+            val pet = Pets.find { id.equal(Id(petIdParam)) }.single()
             model.addAttribute("pet", pet)
-            val owner = Owners.get(pet.ownerId)
+            val owner = Owners.find { id.equal(pet.ownerId) }.single()
             model.addAttribute("owner", owner)
         }
         return "visits/add"
@@ -37,7 +37,7 @@ class VisitController [Autowired] (val db: MongoDB) {
         var petOwnerId: String? = null
         db.withSession {
             Visits.insert(Visit(dateParam, descriptionParam, Id(petIdParam)))
-            petOwnerId = Pets.select { ownerId }.get(Id(petIdParam)).value
+            petOwnerId = Pets.find { id.equal(Id(petIdParam)) }.projection { ownerId }.single().value
         }
         return "redirect:/owners/view?id=${petOwnerId!!}"
     }
@@ -45,13 +45,13 @@ class VisitController [Autowired] (val db: MongoDB) {
     RequestMapping(value = array("/edit"), method = array(RequestMethod.GET))
     public fun edit(RequestParam("id") idParam: String, model: Model): String {
         db.withSession {
-            val visit = Visits.get(Id(idParam))
+            val visit = Visits.find { id.equal(Id(idParam)) }.single()
             model.addAttribute("id", visit.id!!.value)
             model.addAttribute("date", visit.visitDate)
             model.addAttribute("description", visit.description)
-            val pet = Pets.get(visit.petId)
+            val pet = Pets.find { id.equal(visit.petId) }.single()
             model.addAttribute("pet", pet)
-            val owner = Owners.get(pet.ownerId)
+            val owner = Owners.find { id.equal(pet.ownerId) }.single()
             model.addAttribute("owner", owner)
         }
         return "visits/edit"
@@ -63,9 +63,9 @@ class VisitController [Autowired] (val db: MongoDB) {
                    RequestParam("description") descriptionParam: String): String {
         var petOwnerId: String? = null
         db.withSession {
-            Visits.select { visitDate + description }.find(Id(idParam)).set(dateParam, descriptionParam)
-            val petId = Visits.select { petId }.get(Id(idParam))
-            petOwnerId = Pets.select { ownerId }.get(petId).value
+            Visits.find { id.equal(Id(idParam)) }.projection { visitDate + description }.update(dateParam, descriptionParam)
+            val petId = Visits.find { id.equal(Id(idParam)) }.projection { petId }.single()
+            petOwnerId = Pets.find { id.equal(petId) }.projection { ownerId }.single().value
         }
         return "redirect:/owners/view?id=${petOwnerId!!}"
     }

@@ -35,7 +35,7 @@ class PetTypeController [Autowired] (val db: MongoDB) {
     public fun edit(RequestParam("id") idParam: String,
                     RequestParam("name") nameParam: String): String {
         db.withSession {
-            PetTypes.select { name }.find(Id(idParam)).set(nameParam)
+            PetTypes.find { id.equal(Id(idParam)) }.projection { name }.update(nameParam)
         }
         return "redirect:/petTypes/";
     }
@@ -43,7 +43,7 @@ class PetTypeController [Autowired] (val db: MongoDB) {
     RequestMapping(array("/edit"), method = array(RequestMethod.GET))
     fun edit(RequestParam("id") idParam: String, model: Model): String {
         db.withSession {
-            val petType = PetTypes.get(Id(idParam))
+            val petType = PetTypes.find { id.equal(Id(idParam)) }.single()
             model.addAttribute("id", petType.id!!.value)
             model.addAttribute("name", petType.name)
         }
@@ -53,7 +53,7 @@ class PetTypeController [Autowired] (val db: MongoDB) {
     RequestMapping(array("/delete"), method = array(RequestMethod.POST))
     fun delete(RequestParam("id") idParam: String): String {
         db.withSession {
-            PetTypes.delete { id.equal(Id(idParam)) }
+            PetTypes.find { id.equal(Id(idParam)) }.remove()
         }
         return "redirect:/petTypes/";
     }
@@ -61,7 +61,7 @@ class PetTypeController [Autowired] (val db: MongoDB) {
     RequestMapping(array("/"), method = array(RequestMethod.GET))
     fun index(model: Model): String {
         db.withSession {
-            model.addAttribute("petTypes", PetTypes.findAll().toList())
+            model.addAttribute("petTypes", PetTypes.find().toList())
         }
         return "petTypes/index"
     }
