@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+    <file url="file://$PROJECT_DIR$/src/main/kotlin/kotlinx/nosql/mongodb/samples/petclinic/data/Owner.kt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/kotlin/kotlinx/nosql/mongodb/samples/petclinic/data/Pet.kt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/kotlin/kotlinx/nosql/mongodb/samples/petclinic/data/PetType.kt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/kotlin/kotlinx/nosql/mongodb/samples/petclinic/data/Speciality.kt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/kotlin/kotlinx/nosql/mongodb/samples/petclinic/data/Visit.kt" charset="UTF-8" />
+  </component>
 </project>
 

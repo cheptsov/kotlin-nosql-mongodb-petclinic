@@ -1,9 +1,9 @@
 package kotlinx.nosql.mongodb.samples.petclinic.data
 
-import kotlinx.nosql.mongodb.*
 import kotlinx.nosql.*
+import kotlinx.nosql.mongodb.*
 
-object Vets : Schema<Vet>("vets", javaClass()) {
+object Vets : DocumentSchema<Vet>("vets", javaClass()) {
     val firstName = string("firstName")
     val lastName = string("lastName")
     val specialities = setOfString("specialities")
