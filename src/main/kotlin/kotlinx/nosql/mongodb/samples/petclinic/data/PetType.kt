@@ -2,9 +2,10 @@ package kotlinx.nosql.mongodb.samples.petclinic.data
 
 import kotlinx.nosql.mongodb.*
 import kotlinx.nosql.*
+import kotlinx.nosql.mongodb.DocumentSchema
 import org.joda.time.DateTime
 
-object PetTypes : Schema<PetType>("petTypes", javaClass()) {
+object PetTypes : DocumentSchema<PetType>("petTypes", javaClass()) {
     val name = string("name")
 }
 
