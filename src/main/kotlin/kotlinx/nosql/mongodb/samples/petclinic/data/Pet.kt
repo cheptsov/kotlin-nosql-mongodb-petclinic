@@ -2,10 +2,9 @@ package kotlinx.nosql.mongodb.samples.petclinic.data
 
 import kotlinx.nosql.mongodb.*
 import kotlinx.nosql.*
-import kotlinx.nosql.mongodb.DocumentSchema
 import org.joda.time.LocalDate
 
-object Pets : DocumentSchema<Pet>("pets", javaClass()) {
+object Pets : Schema<Pet>("pets", javaClass()) {
     val name = string("name")
     val birthDate = date("birthDate")
     val typeId = id("typeId", PetTypes)
