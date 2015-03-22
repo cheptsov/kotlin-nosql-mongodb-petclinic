@@ -2,16 +2,16 @@ package kotlinx.nosql.mongodb.samples.petclinic.data
 
 import kotlinx.nosql.*
 import org.joda.time.DateTime
-import kotlinx.nosql.mongodb.Schema
+import kotlinx.nosql.mongodb.DocumentSchema
 
-object Owners : Schema<Owner>("owners", javaClass()) {
+object Owners : DocumentSchema<Owner>("owners", javaClass()) {
     val firstName = string("firstName")
     val lastName = string("lastName")
     val address = string("address")
     val city = string("city")
-    val telephone = string("telephone");
+    val telephone = string("telephone")
 
-    {
+    init {
         ensureIndex(text = array(firstName, lastName, telephone))
     }
 }
