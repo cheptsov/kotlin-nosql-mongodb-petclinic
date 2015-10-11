@@ -4,7 +4,7 @@ import kotlinx.nosql.*
 import org.joda.time.DateTime
 import kotlinx.nosql.mongodb.DocumentSchema
 
-object Owners : DocumentSchema<Owner>("owners", javaClass()) {
+object Owners : DocumentSchema<Owner>("owners", Owner::class) {
     val firstName = string("firstName")
     val lastName = string("lastName")
     val address = string("address")
@@ -12,7 +12,7 @@ object Owners : DocumentSchema<Owner>("owners", javaClass()) {
     val telephone = string("telephone")
 
     init {
-        ensureIndex(text = array(firstName, lastName, telephone))
+        ensureIndex(text = arrayOf(firstName, lastName, telephone))
     }
 }
 

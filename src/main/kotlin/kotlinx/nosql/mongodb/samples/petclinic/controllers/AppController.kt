@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver
 import org.springframework.context.annotation.Bean
 
-Controller
-ComponentScan
-EnableAutoConfiguration
+@Controller
+@ComponentScan
+@EnableAutoConfiguration
 class AppController {
-    RequestMapping(value = array("/"))
+    @RequestMapping(value = "/")
     fun home(): String {
         return "redirect:/owners/"
     }
 
-    Bean
+    @Bean
     fun templateResolver(): ServletContextTemplateResolver {
         val resolver = ServletContextTemplateResolver()
         resolver.setPrefix("/resources/views/");
@@ -32,5 +32,5 @@ class AppController {
 
 fun main(args: Array<String>) {
     System.setProperty("server.port", System.getenv("PORT")!!)
-    SpringApplication.run(array(javaClass<AppController>()), args);
+    SpringApplication.run(arrayOf(AppController::class.java), args);
 }

@@ -16,32 +16,32 @@ import kotlinx.nosql.mongodb.samples.petclinic.data.Pet
 import kotlinx.nosql.mongodb.samples.petclinic.data.PetType
 import java.util.regex.Pattern
 
-Controller RequestMapping(value = array("/petTypes"))
-class PetTypeController [Autowired] (val db: MongoDB) {
-    RequestMapping(array("/add"), method = array(RequestMethod.GET))
+@Controller @RequestMapping(value = "/petTypes")
+class PetTypeController @Autowired constructor (val db: MongoDB) {
+    @RequestMapping("/add", method = arrayOf(RequestMethod.GET))
     fun add(): String {
         return "petTypes/add"
     }
 
-    RequestMapping(value = array("/add"), method = array(RequestMethod.POST))
-    public fun add(RequestParam("name") nameParam: String): String {
+    @RequestMapping(value = "/add", method = arrayOf(RequestMethod.POST))
+    public fun add(@RequestParam("name") nameParam: String): String {
         db.withSession {
             PetTypes.insert(PetType(nameParam))
         }
         return "redirect:/petTypes/";
     }
 
-    RequestMapping(value = array("/edit"), method = array(RequestMethod.POST))
-    public fun edit(RequestParam("id") idParam: String,
-                    RequestParam("name") nameParam: String): String {
+    @RequestMapping(value = "/edit", method = arrayOf(RequestMethod.POST))
+    public fun edit(@RequestParam("id") idParam: String,
+                    @RequestParam("name") nameParam: String): String {
         db.withSession {
             PetTypes.find { id.equal(Id(idParam)) }.projection { name }.update(nameParam)
         }
         return "redirect:/petTypes/";
     }
 
-    RequestMapping(array("/edit"), method = array(RequestMethod.GET))
-    fun edit(RequestParam("id") idParam: String, model: Model): String {
+    @RequestMapping("/edit", method = arrayOf(RequestMethod.GET))
+    fun edit(@RequestParam("id") idParam: String, model: Model): String {
         db.withSession {
             val petType = PetTypes.find { id.equal(Id(idParam)) }.single()
             model.addAttribute("id", petType.id!!.value)
@@ -50,15 +50,15 @@ class PetTypeController [Autowired] (val db: MongoDB) {
         return "petTypes/edit"
     }
 
-    RequestMapping(array("/delete"), method = array(RequestMethod.POST))
-    fun delete(RequestParam("id") idParam: String): String {
+    @RequestMapping("/delete", method = arrayOf(RequestMethod.POST))
+    fun delete(@RequestParam("id") idParam: String): String {
         db.withSession {
             PetTypes.find { id.equal(Id(idParam)) }.remove()
         }
         return "redirect:/petTypes/";
     }
 
-    RequestMapping(array("/"), method = array(RequestMethod.GET))
+    @RequestMapping("/", method = arrayOf(RequestMethod.GET))
     fun index(model: Model): String {
         db.withSession {
             model.addAttribute("petTypes", PetTypes.find().toList())

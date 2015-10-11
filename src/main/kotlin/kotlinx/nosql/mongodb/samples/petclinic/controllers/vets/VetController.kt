@@ -21,9 +21,9 @@ import org.springframework.web.context.request.WebRequest
 import java.util.HashSet
 import kotlinx.nosql.mongodb.samples.petclinic.data.Vet
 
-Controller RequestMapping(value = array("/vets"))
-class VetController [Autowired] (val db: MongoDB) {
-    RequestMapping(array("/"), method = array(RequestMethod.GET))
+@Controller @RequestMapping(value = "/vets")
+class VetController @Autowired constructor (val db: MongoDB) {
+    @RequestMapping("/", method = arrayOf(RequestMethod.GET))
     fun index(model: Model): String {
         db.withSession {
             model.addAttribute("vets", Vets.find().toList())
@@ -31,7 +31,7 @@ class VetController [Autowired] (val db: MongoDB) {
         return "vets/index"
     }
 
-    RequestMapping(array("/add"), method = array(RequestMethod.GET))
+    @RequestMapping("/add", method = arrayOf(RequestMethod.GET))
     fun add(model: Model): String {
         db.withSession {
             model.addAttribute("specialities", Specialities.find().toList())
@@ -39,9 +39,9 @@ class VetController [Autowired] (val db: MongoDB) {
         return "vets/add"
     }
 
-    RequestMapping(value = array("/add"), method = array(RequestMethod.POST))
-    public fun add(RequestParam("firstName") firstNameParam: String,
-                   RequestParam("lastName") lastNameParam: String, webRequest: WebRequest): String {
+    @RequestMapping(value = "/add", method = arrayOf(RequestMethod.POST))
+    public fun add(@RequestParam("firstName") firstNameParam: String,
+                   @RequestParam("lastName") lastNameParam: String, webRequest: WebRequest): String {
         db.withSession {
             val specialities = HashSet<String>()
             Specialities.find().forEach {
@@ -54,8 +54,8 @@ class VetController [Autowired] (val db: MongoDB) {
         return "redirect:/vets/";
     }
 
-    RequestMapping(array("/edit"), method = array(RequestMethod.GET))
-    fun edit(RequestParam("id") idParam: String, model: Model): String {
+    @RequestMapping("/edit", method = arrayOf(RequestMethod.GET))
+    fun edit(@RequestParam("id") idParam: String, model: Model): String {
         db.withSession {
             val vet = Vets.find { id.equal(Id(idParam)) }.single()
             model.addAttribute("vet", vet)
@@ -64,10 +64,10 @@ class VetController [Autowired] (val db: MongoDB) {
         return "vets/edit"
     }
 
-    RequestMapping(value = array("/edit"), method = array(RequestMethod.POST))
-    public fun edit(RequestParam("id") idParam: String,
-                    RequestParam("firstName") firstNameParam: String,
-                   RequestParam("lastName") lastNameParam: String, webRequest: WebRequest): String {
+    @RequestMapping(value = "/edit", method = arrayOf(RequestMethod.POST))
+    public fun edit(@RequestParam("id") idParam: String,
+                    @RequestParam("firstName") firstNameParam: String,
+                   @RequestParam("lastName") lastNameParam: String, webRequest: WebRequest): String {
         db.withSession {
             val newSpecialities = HashSet<String>()
             Specialities.find().forEach {

@@ -4,7 +4,7 @@ import kotlinx.nosql.mongodb.*
 import kotlinx.nosql.*
 import kotlinx.nosql.mongodb.DocumentSchema
 
-object Vets : DocumentSchema<Vet>("vets", javaClass()) {
+object Vets : DocumentSchema<Vet>("vets", Vet::class) {
     val firstName = string("firstName")
     val lastName = string("lastName")
     val specialities = setOfString("specialities")

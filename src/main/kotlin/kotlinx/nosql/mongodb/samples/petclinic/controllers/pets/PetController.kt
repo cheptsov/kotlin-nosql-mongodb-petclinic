@@ -15,10 +15,10 @@ import org.joda.time.LocalDate
 import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.beans.factory.annotation.Autowired
 
-Controller RequestMapping(value = array("/pets"))
-class PetController [Autowired] (val db: MongoDB) {
-    RequestMapping(value = array("/add"), method = array(RequestMethod.GET))
-    public fun add(RequestParam("ownerId") ownerIdParam: String, model: Model): String {
+@Controller @RequestMapping(value = "/pets")
+class PetController @Autowired constructor (val db: MongoDB) {
+    @RequestMapping(value = "/add", method = arrayOf(RequestMethod.GET))
+    public fun add(@RequestParam("ownerId") ownerIdParam: String, model: Model): String {
         db.withSession {
             val owner = Owners.find { id.equal(Id(ownerIdParam)) }.single()
             model.addAttribute("owner", owner)
@@ -28,8 +28,8 @@ class PetController [Autowired] (val db: MongoDB) {
         return "pets/add"
     }
 
-    RequestMapping(value = array("/edit"), method = array(RequestMethod.GET))
-    public fun edit(RequestParam("id") idParam: String, model: Model): String {
+    @RequestMapping(value = "/edit", method = arrayOf(RequestMethod.GET))
+    public fun edit(@RequestParam("id") idParam: String, model: Model): String {
         db.withSession {
             val pet = Pets.find { id.equal(Id(idParam)) }.single()
             model.addAttribute("pet", pet)
@@ -41,22 +41,22 @@ class PetController [Autowired] (val db: MongoDB) {
         return "pets/edit"
     }
 
-    RequestMapping(value = array("/add"), method = array(RequestMethod.POST))
-    public fun add(RequestParam("ownerId") ownerIdParam: String,
-                   RequestParam("name") nameParam: String,
-                   RequestParam("birthDate") DateTimeFormat(pattern = "dd/MM/yyyy") birthDateParam: LocalDate,
-                   RequestParam("typeId") typeIdParam: String): String {
+    @RequestMapping(value = "/add", method = arrayOf(RequestMethod.POST))
+    public fun add(@RequestParam("ownerId") ownerIdParam: String,
+                   @RequestParam("name") nameParam: String,
+                   @RequestParam("birthDate") @DateTimeFormat(pattern = "dd/MM/yyyy") birthDateParam: LocalDate,
+                   @RequestParam("typeId") typeIdParam: String): String {
         db.withSession {
             Pets.insert(Pet(nameParam, birthDateParam, Id(typeIdParam), Id(ownerIdParam)))
         }
         return "redirect:/owners/view?id=${ownerIdParam}"
     }
 
-    RequestMapping(value = array("/edit"), method = array(RequestMethod.POST))
-    public fun edit(RequestParam("id") idParam: String,
-                    RequestParam("name") nameParam: String,
-                    RequestParam("birthDate") DateTimeFormat(pattern = "dd/MM/yyyy") birthDateParam: LocalDate,
-                    RequestParam("typeId") typeIdParam: String): String {
+    @RequestMapping(value = "/edit", method = arrayOf(RequestMethod.POST))
+    public fun edit(@RequestParam("id") idParam: String,
+                    @RequestParam("name") nameParam: String,
+                    @RequestParam("birthDate") @DateTimeFormat(pattern = "dd/MM/yyyy") birthDateParam: LocalDate,
+                    @RequestParam("typeId") typeIdParam: String): String {
         var oId: Id<String, Owners>? = null
         db.withSession {
             oId = Pets.find{ id.equal(Id(idParam)) }.projection { ownerId }.single()

@@ -18,32 +18,32 @@ import java.util.regex.Pattern
 import kotlinx.nosql.mongodb.samples.petclinic.data.Specialities
 import kotlinx.nosql.mongodb.samples.petclinic.data.Speciality
 
-Controller RequestMapping(value = array("/specialities"))
-class SpecialityController [Autowired] (val db: MongoDB) {
-    RequestMapping(array("/add"), method = array(RequestMethod.GET))
+@Controller @RequestMapping(value = "/specialities")
+class SpecialityController @Autowired constructor (val db: MongoDB) {
+    @RequestMapping("/add", method = arrayOf(RequestMethod.GET))
     fun add(): String {
         return "specialities/add"
     }
 
-    RequestMapping(value = array("/add"), method = array(RequestMethod.POST))
-    public fun add(RequestParam("name") nameParam: String): String {
+    @RequestMapping(value = "/add", method = arrayOf(RequestMethod.POST))
+    public fun add(@RequestParam("name") nameParam: String): String {
         db.withSession {
             Specialities.insert(Speciality(nameParam))
         }
         return "redirect:/specialities/";
     }
 
-    RequestMapping(value = array("/edit"), method = array(RequestMethod.POST))
-    public fun edit(RequestParam("id") idParam: String,
-                    RequestParam("name") nameParam: String): String {
+    @RequestMapping(value = "/edit", method = arrayOf(RequestMethod.POST))
+    public fun edit(@RequestParam("id") idParam: String,
+                    @RequestParam("name") nameParam: String): String {
         db.withSession {
             Specialities.find{ id.equal(Id(idParam)) }.projection { name }.update(nameParam)
         }
         return "redirect:/specialities/";
     }
 
-    RequestMapping(array("/edit"), method = array(RequestMethod.GET))
-    fun edit(RequestParam("id") idParam: String, model: Model): String {
+    @RequestMapping("/edit", method = arrayOf(RequestMethod.GET))
+    fun edit(@RequestParam("id") idParam: String, model: Model): String {
         db.withSession {
             val speciality = Specialities.find { id.equal(Id(idParam)) }.single()
             model.addAttribute("id", speciality.id!!.value)
@@ -52,15 +52,15 @@ class SpecialityController [Autowired] (val db: MongoDB) {
         return "specialities/edit"
     }
 
-    RequestMapping(array("/delete"), method = array(RequestMethod.POST))
-    fun delete(RequestParam("id") idParam: String): String {
+    @RequestMapping("/delete", method = arrayOf(RequestMethod.POST))
+    fun delete(@RequestParam("id") idParam: String): String {
         db.withSession {
             Specialities.find { id.equal(Id(idParam)) }.remove()
         }
         return "redirect:/specialities/";
     }
 
-    RequestMapping(array("/"), method = array(RequestMethod.GET))
+    @RequestMapping("/", method = arrayOf(RequestMethod.GET))
     fun index(model: Model): String {
         db.withSession {
             model.addAttribute("specialities", Specialities.find().toList())

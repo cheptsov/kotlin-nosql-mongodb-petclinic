@@ -6,6 +6,6 @@
     <file url="file://$PROJECT_DIR$/src/main/kotlin/kotlinx/nosql/mongodb/samples/petclinic/data/PetType.kt" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/kotlin/kotlinx/nosql/mongodb/samples/petclinic/data/Speciality.kt" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/kotlin/kotlinx/nosql/mongodb/samples/petclinic/data/Visit.kt" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
-

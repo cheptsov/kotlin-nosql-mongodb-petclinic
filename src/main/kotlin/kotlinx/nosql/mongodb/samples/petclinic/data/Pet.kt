@@ -5,7 +5,7 @@ import kotlinx.nosql.*
 import kotlinx.nosql.mongodb.DocumentSchema
 import org.joda.time.LocalDate
 
-object Pets : DocumentSchema<Pet>("pets", javaClass()) {
+object Pets : DocumentSchema<Pet>("pets", Pet::class) {
     val name = string("name")
     val birthDate = date("birthDate")
     val typeId = id("typeId", PetTypes)

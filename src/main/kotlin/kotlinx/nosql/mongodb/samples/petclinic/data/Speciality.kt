@@ -5,11 +5,11 @@ import kotlinx.nosql.*
 import kotlinx.nosql.mongodb.DocumentSchema
 import org.joda.time.DateTime
 
-object Specialities : DocumentSchema<Speciality>("specialities", javaClass()) {
+object Specialities : DocumentSchema<Speciality>("specialities", Speciality::class) {
     val name = string("name");
 
-    {
-        ensureIndex(unique = true, ascending = array(name))
+    init {
+        ensureIndex(unique = true, ascending = arrayOf(name))
     }
 }
 

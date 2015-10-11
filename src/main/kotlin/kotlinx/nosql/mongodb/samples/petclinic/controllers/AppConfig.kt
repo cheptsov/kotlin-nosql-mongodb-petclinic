@@ -8,10 +8,10 @@ import com.mongodb.MongoClientURI
 import kotlinx.nosql.CreateDrop
 import org.joda.time.LocalDate
 
-Configuration open class AppConfig {
-    Bean open fun getMongoDB(): MongoDB {
+@Configuration open class AppConfig {
+    @Bean open fun getMongoDB(): MongoDB {
         val mongoURI = MongoClientURI(System.getenv("MONGO_URI"))
-        val mongoDb = MongoDB(mongoURI, schemas = array(Owners, Pets, PetTypes, Vets, Visits, Specialities), initialization = CreateDrop(onCreate = {
+        val mongoDb = MongoDB(mongoURI, schemas = arrayOf(Owners, Pets, PetTypes, Vets, Visits, Specialities), initialization = CreateDrop(onCreate = {
             val birdId = PetTypes.insert(PetType("Bird"))
             val catId = PetTypes.insert(PetType("Cat"))
             val dogId = PetTypes.insert(PetType("Dog"))

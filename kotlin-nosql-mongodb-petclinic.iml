@@ -62,8 +62,6 @@
     <orderEntry type="library" exported="" name="Gradle: ognl:ognl:3.0.6" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.javassist:javassist:3.16.1-GA" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.thymeleaf:thymeleaf:2.1.2.RELEASE" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: org.mongodb:mongo-java-driver:3.0.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: org.mongodb:bson:3.0.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" exported="" scope="RUNTIME" name="Gradle: org.mongodb:mongo-java-driver-core:3.0.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: org.mongodb:mongo-java-driver:3.0.3" level="project" />
   </component>
 </module>
