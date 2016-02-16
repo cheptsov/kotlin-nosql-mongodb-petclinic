@@ -11,6 +11,6 @@ object Visits : DocumentSchema<Visit>("visists", Visit::class) {
     val petId = id("petId", Pets)
 }
 
-class Visit(val visitDate: LocalDate, val description: String, val petId: Id<String, Pets>) {
+data class Visit(val visitDate: LocalDate, val description: String, val petId: Id<String, Pets>) {
     val id : Id<String, Visits>? = null
 }

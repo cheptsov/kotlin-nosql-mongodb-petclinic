@@ -1,17 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: org.jetbrains.kotlin:kotlin-nosql:0.1-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-nosql/0.1-SNAPSHOT/1de18ea6e64dfbc5304d5a4d12073dd9b51cbde0/kotlin-nosql-0.1-SNAPSHOT.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-nosql/0.1-SNAPSHOT/7e4e77ad32cad21a0f63fcd08e184bf7d7b29c83/kotlin-nosql-0.1-SNAPSHOT.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-nosql/0.1-SNAPSHOT/916da4c4e6ab9d60b4898ec193a148faecd451e2/kotlin-nosql-0.1-SNAPSHOT.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-nosql/0.1-SNAPSHOT/f44b2cec474991654f6e32c5f4109b08c8b16527/kotlin-nosql-0.1-SNAPSHOT.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-nosql/0.1-SNAPSHOT/9b117be0634ac17f17f05eab7ef544bc62f22dbb/kotlin-nosql-0.1-SNAPSHOT.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-nosql/0.1-SNAPSHOT/7f1d39b04789fe07616b1b581c91dff10a8542ed/kotlin-nosql-0.1-SNAPSHOT-sources.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-nosql/0.1-SNAPSHOT/639703949567f16c81232ef7214a8ee92fe4f69f/kotlin-nosql-0.1-SNAPSHOT-sources.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-nosql/0.1-SNAPSHOT/ef96f87cde9ff532ef84e9994bd14b07b2ff2497/kotlin-nosql-0.1-SNAPSHOT-sources.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-nosql/0.1-SNAPSHOT/aa291f6d347ce070ed922b61306319646878c899/kotlin-nosql-0.1-SNAPSHOT-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-nosql/0.1-SNAPSHOT/790c735f043d7b113bf30edfcd5720e20c60277f/kotlin-nosql-0.1-SNAPSHOT-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

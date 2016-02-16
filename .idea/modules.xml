@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/kotlin-nosql-mongodb-petclinic.iml" filepath="$PROJECT_DIR$/kotlin-nosql-mongodb-petclinic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-nosql-mongodb-petclinic.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-nosql-mongodb-petclinic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-nosql-mongodb-petclinic_main.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-nosql-mongodb-petclinic_main.iml" group="kotlin-nosql-mongodb-petclinic" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/kotlin-nosql-mongodb-petclinic_test.iml" filepath="$PROJECT_DIR$/.idea/modules/kotlin-nosql-mongodb-petclinic_test.iml" group="kotlin-nosql-mongodb-petclinic" />
     </modules>
   </component>
 </project>
-

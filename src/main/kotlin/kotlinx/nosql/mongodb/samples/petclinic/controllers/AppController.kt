@@ -26,7 +26,6 @@ class AppController {
         resolver.setTemplateMode("HTML5");
         resolver.setCacheable(false);
         return resolver;
-
     }
 }
 

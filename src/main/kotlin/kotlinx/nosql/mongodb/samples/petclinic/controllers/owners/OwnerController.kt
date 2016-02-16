@@ -72,7 +72,7 @@ class OwnerController @Autowired constructor (val db: MongoDB) {
             val owner = Owners.find { id.equal(Id(idParam)) }.single()
             model.addAttribute("owner", owner)
             val pets = Pets.find { ownerId.equal(owner.id)}.toList()
-            pets.groupBy {  }
+
             val petTypes = hashMapOf<Pet,PetType>()
             val petVisits = hashMapOf<Pet, List<Visit>>()
             pets.forEach {

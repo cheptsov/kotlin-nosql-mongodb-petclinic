@@ -23,9 +23,5 @@
       </option>
       <option name="myCustomValuesEnabled" value="true" />
     </inspection_tool>
-    <inspection_tool class="W3CssValidation" enabled="false" level="WARNING" enabled_by_default="false">
-      <option name="myCssVersion" value="css3" />
-      <option name="myIgnoreVendorSpecificProperties" value="false" />
-    </inspection_tool>
   </profile>
 </component>

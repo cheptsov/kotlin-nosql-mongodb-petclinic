@@ -5,6 +5,7 @@
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-nosql-mongodb/0.1-SNAPSHOT/b7f1ad4cd89a4cda976720b9ed2f186af76619f7/kotlin-nosql-mongodb-0.1-SNAPSHOT.jar!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-nosql-mongodb/0.1-SNAPSHOT/b82babe3cbe286f712dec861269ff974dd8aea7f/kotlin-nosql-mongodb-0.1-SNAPSHOT.jar!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-nosql-mongodb/0.1-SNAPSHOT/2bf83793da66ce6fca548f35a346a88dc2038256/kotlin-nosql-mongodb-0.1-SNAPSHOT.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-nosql-mongodb/0.1-SNAPSHOT/8a5562c77c47ae704c00a89a66e6f1cce36cfd45/kotlin-nosql-mongodb-0.1-SNAPSHOT.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
@@ -12,6 +13,7 @@
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-nosql-mongodb/0.1-SNAPSHOT/bc9ee301f51f0804ef4e29a98f7a19926ae925fa/kotlin-nosql-mongodb-0.1-SNAPSHOT-sources.jar!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-nosql-mongodb/0.1-SNAPSHOT/1e2f2da5599fcb5ccaca791c058b1a94ffc64b7b/kotlin-nosql-mongodb-0.1-SNAPSHOT-sources.jar!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-nosql-mongodb/0.1-SNAPSHOT/cca0d84d2453ec1993c7169f48d7e4de4c0a6d5e/kotlin-nosql-mongodb-0.1-SNAPSHOT-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-nosql-mongodb/0.1-SNAPSHOT/d2fadc192cfde7832cb346d6bca28c60522c98ba/kotlin-nosql-mongodb-0.1-SNAPSHOT-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

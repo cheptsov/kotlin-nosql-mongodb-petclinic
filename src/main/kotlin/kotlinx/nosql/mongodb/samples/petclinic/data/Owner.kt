@@ -16,6 +16,6 @@ object Owners : DocumentSchema<Owner>("owners", Owner::class) {
     }
 }
 
-class Owner(val firstName: String, val lastName: String, val address: String, val city: String, val telephone: String) {
+data class Owner(val firstName: String, val lastName: String, val address: String, val city: String, val telephone: String) {
     val id: Id<String, Owners>? = null
 }

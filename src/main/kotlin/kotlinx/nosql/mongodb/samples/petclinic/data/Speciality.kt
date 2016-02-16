@@ -13,6 +13,6 @@ object Specialities : DocumentSchema<Speciality>("specialities", Speciality::cla
     }
 }
 
-class Speciality(val name: String) {
+data class Speciality(val name: String) {
     val id : Id<String, Specialities>? = null
 }

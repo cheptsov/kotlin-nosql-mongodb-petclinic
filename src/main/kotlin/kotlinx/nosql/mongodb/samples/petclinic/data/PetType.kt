@@ -9,6 +9,6 @@ object PetTypes : DocumentSchema<PetType>("petTypes", PetType::class) {
     val name = string("name")
 }
 
-class PetType(val name: String) {
+data class PetType(val name: String) {
     val id : Id<String, PetTypes>? = null
 }
